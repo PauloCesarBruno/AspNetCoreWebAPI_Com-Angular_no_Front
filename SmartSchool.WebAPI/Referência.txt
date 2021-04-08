@@ -1,0 +1,11 @@
+. MINHA PASTA MODELS ONDE ESTÃO AS CLASSES E OS RESPECTIVOS RELACIONAMENTOS:
+================================================================================================
+
+
+.Exixte uma Associação de MUITOS PARA MUITOS entre as Classes (Aluno.cs) e (AlunoDisciplina.cs),
+ ou seja, Diversos Alunos podem fazer Diversas Disciplinas e Diversas Disciplinas podem conter 
+ diversos Alunos.
+
+ .Existe uma Associação de UM PARA MUITOS entre as Classes (Professor.cs) e (Disciplina.cs),
+  ou seja, um Professor pode dar Auloa para Varias Disciplinas, porém uma Disciplina só pode
+  ter um Professor.
