@@ -38,7 +38,7 @@ namespace SmartSchool.WebAPI.Controllers
         }
 
         // api/Aluno/byID
-        [HttpGet("byId/{id}")] // QueryString: Ex.: http://localhost:5000/api/Aluno/byId?id=3
+        [HttpGet("byId/{id}")] // QueryString: Ex.: http://localhost:5000/api/Aluno/byId/3
         public IActionResult GetById(int id)
         {
             var aluno = Alunos.FirstOrDefault(a => a.Id == id);
