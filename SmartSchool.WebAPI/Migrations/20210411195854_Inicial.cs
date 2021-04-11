@@ -2,7 +2,7 @@
 
 namespace SmartSchool.WebAPI.Migrations
 {
-    public partial class init : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace SmartSchool.WebAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Sobrenome = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Telefone = table.Column<string>(type: "nvarchar(30)", nullable: true)
                 },
@@ -27,7 +27,7 @@ namespace SmartSchool.WebAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(100)", nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(100)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,7 +40,7 @@ namespace SmartSchool.WebAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     ProfessorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
