@@ -85,7 +85,7 @@ namespace SmartSchool.WebAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var prof = _repo.GetProfessorById(id, false);
+            var prof = _repo.GetProfessorById(id, false); // Aqui se eu colocar  (true) Vem tudo ...
 
             if(prof == null) BadRequest("Professor(a) não encontrado !!!");
 

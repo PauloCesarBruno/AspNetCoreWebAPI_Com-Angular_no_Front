@@ -30,7 +30,7 @@ namespace SmartSchool.WebAPI.Controllers
         [HttpGet("{id}")] // QueryString: Ex.: http://localhost:5000/api/Aluno/3
         public IActionResult GetById(int id)
         {
-            var aluno = _repo.GetAlunoById(id, false);
+            var aluno = _repo.GetAlunoById(id, false); // Aqui se eu colocar  (true) Vem tudo ...
             if (aluno == null) return BadRequest("Aluno(a) de codigo " + id + " não foi encontrado !!!");
 
             return Ok(aluno);
