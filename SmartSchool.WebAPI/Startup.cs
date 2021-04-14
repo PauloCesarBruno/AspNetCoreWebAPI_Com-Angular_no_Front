@@ -28,9 +28,16 @@ namespace SmartSchool.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SmartContext>(context =>
-            context.UseSqlServer(Configuration.GetConnectionString("Default")));
-
-            services.AddControllers();
+                context.UseSqlServer(Configuration.GetConnectionString("Default"))
+            );
+            // Injetando IRepository e Repository p/ os Controller para encapsulamento e abstração do Contexto            
+            services.AddScoped<IRepository, Repository>();
+            services.AddCors();
+            
+            // Abaixo Ignora o Loop do Json.
+            services.AddControllers()
+                    .AddNewtonsoftJson(options =>  options.SerializerSettings.ReferenceLoopHandling = 
+                                                   Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,9 +48,10 @@ namespace SmartSchool.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseAuthorization();
 
