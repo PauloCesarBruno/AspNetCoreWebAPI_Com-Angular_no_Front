@@ -1,16 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using SmartSchool.WebAPI.Data;
 
 namespace SmartSchool.WebAPI
@@ -29,15 +24,24 @@ namespace SmartSchool.WebAPI
         {
             services.AddDbContext<SmartContext>(context =>
                 context.UseSqlServer(Configuration.GetConnectionString("Default"))
-            );
-            // Injetando IRepository e Repository p/ os Controller para encapsulamento e abstração do Contexto            
-            services.AddScoped<IRepository, Repository>();
-            services.AddCors();
+            );                       
             
             // Abaixo Ignora o Loop do Json.
             services.AddControllers()
-                    .AddNewtonsoftJson(options =>  options.SerializerSettings.ReferenceLoopHandling = 
-                                                   Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                    .AddNewtonsoftJson(
+                        opt => opt.SerializerSettings.ReferenceLoopHandling =
+                            Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            // Injetando dependência para o Auto_Mapper Ja baixado e referenciasdo no (csproj)
+            // Quero fazer Mapeamento entre os meus DTO´s e meu Dominio(Models).
+            /* Passando como parâmetro a aplicação de dominio dos assemblies, para que o Auto_Mapper 
+            procure dentro dos meus assmblies (Dll´s) quem esta herdando de Profille dentro da pasra
+            (Helpers onde esta o SmartSchoolProfile.cs).*/
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            // Injetando IRepository e Repository p/ os Controller para encapsulamento e abstração do Contexto 
+            services.AddScoped<IRepository, Repository>();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

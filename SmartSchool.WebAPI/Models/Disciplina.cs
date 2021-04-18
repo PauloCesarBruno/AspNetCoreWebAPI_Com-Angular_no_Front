@@ -6,14 +6,16 @@ namespace SmartSchool.WebAPI.Models
     {
         public Disciplina() { }
 
-        public Disciplina(int id, string nome, int professorId)
+        public Disciplina(int id, string nome, int professorId, int cursoId)
         {
             this.Id = id;
             this.Nome = nome;
             this.ProfessorId = professorId;
+            this.CursoId = cursoId;
         }
         public int Id { get; set; }
         public string Nome { get; set; }
+        public int CargaHoraria { get; set; }
 
         // EXEMPLO ABAIXO: RELAÇÃO UM PARA MUITOS
         // UM PROFESSOR PODE LECIONAR EM VÁRIAS DISCIPLINAS
@@ -24,8 +26,14 @@ namespace SmartSchool.WebAPI.Models
         // PROFESSOR CARLOS -> FISICA E QUIMICA
         // PROFESSOR PAULO -> PORTUGUÊS, QUIMICA E GEOGRAFIA
         // E ASSIM VAI...
+        public int? PrerequsitoId { get; set; }  = null; // ? => Pode ser NULO
+        public Disciplina Prerequsito { get; set; } // Ex.: Imagina se você vai fazer Matematica 2 se não fez a 1...
         public int ProfessorId { get; set; } //Uma Disciplina para um Professor
         public Professor Professor { get; set; }
+
+        // Relacionamento Disciplina x Curso Muitos para Muitos
+        public int CursoId { get; set; } //Uma Disciplina tem que ser cadastrada para um determinado Curso.
+        public Curso Curso { get; set; }
 
 
         // EXEMPLO ABAIXO: RELAÇÃO MUITOS PARA MUITOS

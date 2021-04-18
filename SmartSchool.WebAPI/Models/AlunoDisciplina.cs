@@ -1,3 +1,5 @@
+using System;
+
 namespace SmartSchool.WebAPI.Models
 {
     public class AlunoDisciplina // Classe Intermediária entre Aluno e Disciplina
@@ -10,6 +12,9 @@ namespace SmartSchool.WebAPI.Models
             this.AlunoId = alunoId;
             this.DisciplinaId = disciplinaId;               
         }
+        public DateTime DataIni { get; set; } = DateTime.Now; // Quando cadastrar já vem com a data preenchida.
+        public DateTime? DataFim { get; set; } = null; // Pode ser Nulo (posso não ter terminado essa disciplina).
+        public int? Nota { get; set; } = null; // Nota pode ser nula.
         public int AlunoId { get; set; }
         public Aluno Aluno { get; set; } // Ja retorna a Classe populada e não apenas o Id
         public int DisciplinaId { get; set; }
