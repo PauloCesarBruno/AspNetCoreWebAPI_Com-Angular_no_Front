@@ -127,11 +127,11 @@ namespace SmartSchool.WebAPI.Data
             return query.ToArray();
         }
 
-        public Professor GetProfessorById(int professorId, bool includeProfessor = false)
+        public Professor GetProfessorById(int professorId, bool includeAluno = false)
         {
              IQueryable<Professor> query = _context.Professores;
 
-            if (includeProfessor)
+            if (includeAluno)
             {
                 query = query.Include(p => p.Disciplinas)
                              .ThenInclude(d => d.AlunosDisciplinas)
