@@ -2,25 +2,38 @@ using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SmartSchool.WebAPI.Data;
-using SmartSchool.WebAPI.Dtos;
+using SmartSchool.WebAPI.V1.Dtos;
 using SmartSchool.WebAPI.Models;
 
-namespace SmartSchool.WebAPI.Controllers
+namespace SmartSchool.WebAPI.V1.Controllers
 {
+    /// <summary>
+    /// Versão 01 do meu controlador de Alunos
+    /// </summary>
     [ApiController]
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class AlunoController : ControllerBase
     {
 
         public IRepository _repo;
         private readonly IMapper _mapper;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="repo"></param>
+        /// <param name="mapper"></param>
         public AlunoController(IRepository repo, IMapper mapper)
         {
             _mapper = mapper; // Feito a Injeção do AutoMapper
             _repo = repo;
         }
-
+        
+        /// <summary>
+        /// Método responsável para retornar todos os Alunos, da Versão 01.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -29,6 +42,10 @@ namespace SmartSchool.WebAPI.Controllers
             return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos));
         }
 
+        /// <summary>
+        /// Método responsável por retornar apenas um(a) Aluno(a)Dto, da Versão 01.
+        /// </summary>
+        /// <returns></returns>
         // ATENÇÃO (DEIXAR ESSE GETREGISTER POR ENQUANTO)
         //========================================================
          [HttpGet("getregister")]
@@ -38,6 +55,11 @@ namespace SmartSchool.WebAPI.Controllers
         }
         //========================================================
 
+        /// <summary>
+        ///  Método responsável por retornar apenas um Aluno(a) por meio do Código Id, da Versão 01.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // api/Aluno
         [HttpGet("{id}")] // QueryString: Ex.: http://localhost:5000/api/Aluno/3
         public IActionResult GetById(int id)
@@ -49,8 +71,13 @@ namespace SmartSchool.WebAPI.Controllers
             var alunoDto = _mapper.Map<AlunoDto>(aluno);
 
             return Ok(alunoDto);
-        }
-
+        }        
+        
+        /// <summary>
+        /// Metodo responsável por novo Registro de um(a) Aluno(a), da Versão 01.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         // api/Aluno
         [HttpPost]
         public IActionResult Post(AlunoRegistrarDto model)
@@ -66,6 +93,12 @@ namespace SmartSchool.WebAPI.Controllers
             return BadRequest("Falha ao Registrar aluno(a) !!!");
         }
 
+        /// <summary>
+        /// Método Responsalvel por Alteração do Registro de algum(a) Aluno(a), da Versão 01.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         // api/Aluno/Id
         [HttpPut("{id}")]
         public IActionResult Put(int id, AlunoRegistrarDto model)
@@ -85,6 +118,12 @@ namespace SmartSchool.WebAPI.Controllers
             return BadRequest("Falha ao atualizar o  registro do aluno(a) !!!");
         }
 
+        /// <summary>
+        ///  Método Responsalvel por Alteração (Parcial) do Registro de algum(a) Aluno(a), da Versão 01.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         // api/Aluno/Id
         [HttpPatch("{id}")] // [HttpPatch("{id}")] -> Atualiza Parcialmente
         public IActionResult Patch(int id, AlunoRegistrarDto model)
@@ -104,6 +143,11 @@ namespace SmartSchool.WebAPI.Controllers
             return BadRequest("Falha ao atualizar o  registro do aluno(a) !!!");
         }
 
+        /// <summary>
+        ///  MétodoResponsalvel por Exclusão de Registro de um(a) Aluno(a), da Versão 01.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // api/Aluno/Id
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

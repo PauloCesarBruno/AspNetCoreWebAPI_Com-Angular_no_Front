@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# CS1591: O comentário XML ausente não foi encontrado para o tipo ou membro visível publicamente
+dotnet_diagnostic.CS1591.severity = none
+
+# CS1572: O comentário XML tem uma tag param, mas não há nenhum parâmetro com esse nome
+dotnet_diagnostic.CS1572.severity = warning

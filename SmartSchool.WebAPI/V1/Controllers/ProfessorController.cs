@@ -2,41 +2,62 @@ using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SmartSchool.WebAPI.Data;
-using SmartSchool.WebAPI.Dtos;
+using SmartSchool.WebAPI.V1.Dtos;
 using SmartSchool.WebAPI.Models;
 
-namespace SmartSchool.WebAPI.Controllers
+namespace SmartSchool.WebAPI.V1.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
+    /// <summary>
+    /// Versão 01 do meu controlador de Professores
+    /// </summary>
+    [ApiController]    
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class ProfessorController : ControllerBase
-    {        
-        
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="repo"></param>
+        /// <param name="mapper"></param>
         private readonly IRepository _repo;
-         private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public ProfessorController(IRepository repo, IMapper mapper)
         {
+            _mapper = mapper; // Feito a Injeção do AutoMapper
             _repo = repo;
-            _mapper = mapper;
         }
 
-       [HttpGet]
+        /// <summary>
+        /// Método responsável para retornar todos os Professores, da Versão 01.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public IActionResult Get()
         {
              var professor = _repo.GetAllProfessores(true);
             return Ok(_mapper.Map<IEnumerable<ProfessorDto>>(professor));
         }
 
+        /// <summary>
+        /// Método responsável por retornar apenas um(a) Professor(a)Dto, da Versão 01.
+        /// </summary>
+        /// <returns></returns>
         // ATENÇÃO (DEIXAR ESSE GETREGISTER POR ENQUANTO)
         //========================================================
-         [HttpGet("getregister")]
+        [HttpGet("getregister")]
         public IActionResult GetRegister()
         {
             return Ok(new ProfessorRegistrarDto());
         }
         //========================================================
 
+        /// <summary>
+        ///  Método responsável por retornar apenas um Professor(a) por meio do Código Id, da Versão 01.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // api/Professor
         [HttpGet("{id}")] // QueryString: Ex.: http://localhost:5000/api/Professor/3
         public IActionResult GetById(int id)
@@ -49,7 +70,12 @@ namespace SmartSchool.WebAPI.Controllers
 
             return Ok(professorDto);
         }
-        
+
+        /// <summary>
+        /// Metodo responsável por novo Registro de um(a) Professor(a), da Versão 01.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         // api/Professor
         [HttpPost]
         public IActionResult Post(ProfessorRegistrarDto model)
@@ -66,6 +92,12 @@ namespace SmartSchool.WebAPI.Controllers
             return BadRequest("Falha no Registro do professor(a) !!!"); 
         }
 
+        /// <summary>
+        /// Método Responsalvel por Alteração do Registro de algum(a) Professor(a), da Versão 01.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         // api/Professor/Id
         [HttpPut("{id}")]
         public IActionResult Put(int id, ProfessorRegistrarDto model)
@@ -85,7 +117,13 @@ namespace SmartSchool.WebAPI.Controllers
             return BadRequest("Falha ao Atualizar Professor(a) !!!");
         }
 
-         // api/Professor/Id
+        /// <summary>
+        ///  Método Responsalvel por Alteração (Parcial) do Registro de algum(a) Professor(a), da Versão 01.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        // api/Professor/Id
         [HttpPatch("{id}")] // [HttpPatch("{id}")] -> Atualiza Parcialmente
         public IActionResult Patch(int id, ProfessorRegistrarDto model)
         {
@@ -104,7 +142,12 @@ namespace SmartSchool.WebAPI.Controllers
             return BadRequest("Falha ao Atualizar Professor(a) !!!");
         }
 
-         // api/Professor/Id
+        /// <summary>
+        ///  MétodoResponsalvel por Exclusão de Registro de um Professor(a), da Versão 01.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        // api/Professor/Id
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

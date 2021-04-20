@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SmartSchool.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:SmartSchool.WebAPI.V1.Controllers.AlunoController">
+            <summary>
+            Versão 01 do meu controlador de Alunos
+            </summary>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.#ctor(SmartSchool.WebAPI.Data.IRepository,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="repo"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Get">
+            <summary>
+            Método responsável para retornar todos os Alunos, da Versão 01.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.GetRegister">
+            <summary>
+            Método responsável por retornar apenas um(a) Aluno(a)Dto, da Versão 01.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.GetById(System.Int32)">
+            <summary>
+             Método responsável por retornar apenas um Aluno(a) por meio do Código Id, da Versão 01.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Post(SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto)">
+            <summary>
+            Metodo responsável por novo Registro de um(a) Aluno(a), da Versão 01.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Put(System.Int32,SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto)">
+            <summary>
+            Método Responsalvel por Alteração do Registro de algum(a) Aluno(a), da Versão 01.
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Patch(System.Int32,SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto)">
+            <summary>
+             Método Responsalvel por Alteração (Parcial) do Registro de algum(a) Aluno(a), da Versão 01.
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Delete(System.Int32)">
+            <summary>
+             MétodoResponsalvel por Exclusão de Registro de um(a) Aluno(a), da Versão 01.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartSchool.WebAPI.V1.Controllers.ProfessorController">
+            <summary>
+            Versão 01 do meu controlador de Professores
+            </summary>
+        </member>
+        <member name="F:SmartSchool.WebAPI.V1.Controllers.ProfessorController._repo">
+            <summary>
+            
+            </summary>
+            <param name="repo"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.ProfessorController.Get">
+            <summary>
+            Método responsável para retornar todos os Professores, da Versão 01.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.ProfessorController.GetRegister">
+            <summary>
+            Método responsável por retornar apenas um(a) Professor(a)Dto, da Versão 01.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.ProfessorController.GetById(System.Int32)">
+            <summary>
+             Método responsável por retornar apenas um Professor(a) por meio do Código Id, da Versão 01.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.ProfessorController.Post(SmartSchool.WebAPI.V1.Dtos.ProfessorRegistrarDto)">
+            <summary>
+            Metodo responsável por novo Registro de um(a) Professor(a), da Versão 01.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.ProfessorController.Put(System.Int32,SmartSchool.WebAPI.V1.Dtos.ProfessorRegistrarDto)">
+            <summary>
+            Método Responsalvel por Alteração do Registro de algum(a) Professor(a), da Versão 01.
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.ProfessorController.Patch(System.Int32,SmartSchool.WebAPI.V1.Dtos.ProfessorRegistrarDto)">
+            <summary>
+             Método Responsalvel por Alteração (Parcial) do Registro de algum(a) Professor(a), da Versão 01.
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.ProfessorController.Delete(System.Int32)">
+            <summary>
+             MétodoResponsalvel por Exclusão de Registro de um Professor(a), da Versão 01.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto">
+            <summary>
+            Esse � o DTO de Aluno para Registro...
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto.Id">
+            <summary>
+            Identificador e chave do banco.
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto.Matricula">
+            <summary>
+            Chave do Aluno para outros negocios na Institui��o.
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto.Nome">
+            <summary>
+            Nome � o Primeiro Nome e Sobrenome do Aluno.
+            </summary>
+        </member>
+        <member name="T:SmartSchool.WebAPI.V2.Controllers.AlunoController">
+            <summary>
+            Versão 02 do meu controlador de Alunos
+            </summary>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.#ctor(SmartSchool.WebAPI.Data.IRepository,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="repo"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.Get">
+            <summary>
+            Método responsável para retornar todos os Alunos da Versão 02.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.GetById(System.Int32)">
+            <summary>
+             Método responsável por retornar apenas um Aluno(a) por meio do Código Id, da Versão 02.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.Post(SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto)">
+            <summary>
+            Metodo responsável por novo Registro de um(a) Aluno(a), da Versão 02.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.Put(System.Int32,SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto)">
+            <summary>
+            Método Responsalvel por Alteração do Registro de algum(a) Aluno(a), da Versão 02.
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.Delete(System.Int32)">
+            <summary>
+             MétodoResponsalvel por Exclusão de Registro de um(a) Aluno(a), da Versão 02.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SmartSchool.WebAPI.V2.Dtos.AlunoRegistrarDto">
+            <summary>
+            Esse � o DTO de Aluno para Registro...
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V2.Dtos.AlunoRegistrarDto.Id">
+            <summary>
+            Identificador e chave do banco.
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V2.Dtos.AlunoRegistrarDto.Matricula">
+            <summary>
+            Chave do Aluno para outros negocios na Institui��o.
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V2.Dtos.AlunoRegistrarDto.Nome">
+            <summary>
+            Nome � o Primeiro Nome e Sobrenome do Aluno.
+            </summary>
+        </member>
+    </members>
+</doc>
