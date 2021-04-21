@@ -28,7 +28,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.GetById(System.Int32)">
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.GetByIdAsync(System.Int32)">
             <summary>
              Método responsável por retornar apenas um Aluno(a) por meio do Código Id, da Versão 01.
             </summary>
@@ -89,7 +89,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SmartSchool.WebAPI.V1.Controllers.ProfessorController.GetById(System.Int32)">
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.ProfessorController.GetByIdAsync(System.Int32)">
             <summary>
              Método responsável por retornar apenas um Professor(a) por meio do Código Id, da Versão 01.
             </summary>
@@ -153,7 +153,7 @@
         </member>
         <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.#ctor(SmartSchool.WebAPI.Data.IRepository,AutoMapper.IMapper)">
             <summary>
-            
+            Método responsável por retornar apenas um Aluno(a) por meio do Código Id, da Versão 02.
             </summary>
             <param name="repo"></param>
             <param name="mapper"></param>
@@ -164,7 +164,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.GetById(System.Int32)">
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.GetByIdAsync(System.Int32)">
             <summary>
              Método responsável por retornar apenas um Aluno(a) por meio do Código Id, da Versão 02.
             </summary>

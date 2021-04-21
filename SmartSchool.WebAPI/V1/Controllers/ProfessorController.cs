@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmartSchool.WebAPI.Data;
 using SmartSchool.WebAPI.V1.Dtos;
 using SmartSchool.WebAPI.Models;
+using System.Threading.Tasks;
 
 namespace SmartSchool.WebAPI.V1.Controllers
 {
@@ -33,10 +34,11 @@ namespace SmartSchool.WebAPI.V1.Controllers
         /// Método responsável para retornar todos os Professores, da Versão 01.
         /// </summary>
         /// <returns></returns>
+        // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
         [HttpGet]
-        public IActionResult Get()
+        public async Task <IActionResult> Get()
         {
-             var professor = _repo.GetAllProfessores(true);
+             var professor = await _repo.GetAllProfessoresAsync(true);
             return Ok(_mapper.Map<IEnumerable<ProfessorDto>>(professor));
         }
 
@@ -59,11 +61,12 @@ namespace SmartSchool.WebAPI.V1.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         // api/Professor
+        // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
         [HttpGet("{id}")] // QueryString: Ex.: http://localhost:5000/api/Professor/3
-        public IActionResult GetById(int id)
+        public async Task <IActionResult> GetByIdAsync(int id)
         {
            // Aqui abaixo se eu colocar  (id, true) Vem tudo que esta em Join lá no Repository 
-           var professor = _repo.GetProfessorById(id, false);
+           var professor = await _repo.GetProfessorByIdAsync(id, false);
             if (professor == null) return BadRequest("Professor(a) de codigo " + id + " não foi encontrado !!!");
 
             var professorDto = _mapper.Map<ProfessorDto>(professor);
@@ -77,15 +80,16 @@ namespace SmartSchool.WebAPI.V1.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         // api/Professor
+        // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
         [HttpPost]
-        public IActionResult Post(ProfessorRegistrarDto model)
+        public async Task <IActionResult> Post(ProfessorRegistrarDto model)
         {
 
             var professor = _mapper.Map<Professor>(model);
 
             _repo.Add(professor);
             
-            if (_repo.SaveChanges())
+            if (await _repo.SaveChangesAsync())
             {
                 return Created($"/api/professor/{model.Id}", _mapper.Map<ProfessorDto>(professor));
             }   
@@ -99,8 +103,9 @@ namespace SmartSchool.WebAPI.V1.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         // api/Professor/Id
+        // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
         [HttpPut("{id}")]
-        public IActionResult Put(int id, ProfessorRegistrarDto model)
+        public async Task <IActionResult> Put(int id, ProfessorRegistrarDto model)
         {
              var professor = _repo.GetProfessorById(id);
 
@@ -110,7 +115,7 @@ namespace SmartSchool.WebAPI.V1.Controllers
 
             _repo.Update(professor);
 
-            if (_repo.SaveChanges())
+            if (await _repo.SaveChangesAsync())
             {
                 return Created($"/api/professor/{model.Id}", _mapper.Map<ProfessorDto>(professor));
             }                      
@@ -124,8 +129,9 @@ namespace SmartSchool.WebAPI.V1.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         // api/Professor/Id
+        // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
         [HttpPatch("{id}")] // [HttpPatch("{id}")] -> Atualiza Parcialmente
-        public IActionResult Patch(int id, ProfessorRegistrarDto model)
+        public async Task <IActionResult> Patch(int id, ProfessorRegistrarDto model)
         {
             var professor = _repo.GetProfessorById(id);
 
@@ -135,7 +141,7 @@ namespace SmartSchool.WebAPI.V1.Controllers
 
             _repo.Update(professor);
 
-            if (_repo.SaveChanges())
+            if (await _repo.SaveChangesAsync())
             {
                 return Created($"/api/professor/{model.Id}", _mapper.Map<ProfessorDto>(professor));
             }                      
@@ -148,8 +154,9 @@ namespace SmartSchool.WebAPI.V1.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         // api/Professor/Id
+        // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task <IActionResult> Delete(int id)
         {
             // Aqui abaixo se eu colocar  (id, true) Vem tudo que esta em Join lá no Repository
             var professor = _repo.GetProfessorById(id);
@@ -158,7 +165,7 @@ namespace SmartSchool.WebAPI.V1.Controllers
 
             _repo.Delete(professor);
 
-            if (_repo.SaveChanges())
+            if (await _repo.SaveChangesAsync())
             {
                 return Ok("Professor(a) deletado(a) com sucesso !!!");
             }                      

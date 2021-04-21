@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmartSchool.WebAPI.Data;
 using SmartSchool.WebAPI.V1.Dtos;
 using SmartSchool.WebAPI.Models;
+using System.Threading.Tasks;
 
 namespace SmartSchool.WebAPI.V2.Controllers
 {
@@ -20,7 +21,7 @@ namespace SmartSchool.WebAPI.V2.Controllers
         private readonly IMapper _mapper;
 
         /// <summary>
-        /// 
+        /// Método responsável por retornar apenas um Aluno(a) por meio do Código Id, da Versão 02.
         /// </summary>
         /// <param name="repo"></param>
         /// <param name="mapper"></param>
@@ -34,10 +35,11 @@ namespace SmartSchool.WebAPI.V2.Controllers
         /// Método responsável para retornar todos os Alunos da Versão 02.
         /// </summary>
         /// <returns></returns>
+        // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
         [HttpGet]
-        public IActionResult Get()
+        public async Task <IActionResult> Get()
         {
-            var alunos = _repo.GetAllAlunos(true);            
+            var alunos = await _repo.GetAllAlunosAsync(true);            
 
             return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos));
         }
@@ -48,11 +50,12 @@ namespace SmartSchool.WebAPI.V2.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         // api/Aluno
+        // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
         [HttpGet("{id}")] // QueryString: Ex.: http://localhost:5000/api/Aluno/3
-        public IActionResult GetById(int id)
+        public async Task <IActionResult> GetByIdAsync(int id)
         {
             // Aqui abaixo se eu colocar  (id, true) Vem tudo que esta em Join lá no Repository
-            var aluno = _repo.GetAlunoById(id, false);
+            var aluno = await _repo.GetAlunoByIdAsync(id, false);
             if (aluno == null) return BadRequest("Aluno(a) de codigo " + id + " não foi encontrado !!!");
 
             var alunoDto = _mapper.Map<AlunoDto>(aluno);
@@ -67,13 +70,13 @@ namespace SmartSchool.WebAPI.V2.Controllers
         /// <returns></returns>
         // api/Aluno
         [HttpPost]
-        public IActionResult Post(AlunoRegistrarDto model)
+        public async Task <IActionResult> Post(AlunoRegistrarDto model)
         {
             var aluno = _mapper.Map<Aluno>(model);
 
             _repo.Add(aluno);
 
-            if (_repo.SaveChanges())
+            if (await _repo.SaveChangesAsync())
             {
                 return Created($"/api/aluno/{model.Id}", _mapper.Map<AlunoDto>(aluno));
             }
@@ -88,7 +91,7 @@ namespace SmartSchool.WebAPI.V2.Controllers
         /// <returns></returns>
         // api/Aluno/Id
         [HttpPut("{id}")]
-        public IActionResult Put(int id, AlunoRegistrarDto model)
+        public async Task <IActionResult> Put(int id, AlunoRegistrarDto model)
         {
             var aluno = _repo.GetAlunoById(id);
 
@@ -98,7 +101,7 @@ namespace SmartSchool.WebAPI.V2.Controllers
 
             _repo.Update(aluno);
 
-            if (_repo.SaveChanges())
+            if (await _repo.SaveChangesAsync())
             {
                 return Created($"/api/aluno/{model.Id}", _mapper.Map<AlunoDto>(aluno));
             }
@@ -112,7 +115,7 @@ namespace SmartSchool.WebAPI.V2.Controllers
         /// <returns></returns>
         // api/Aluno/Id
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task <IActionResult> Delete(int id)
         {
             // OBVIAMENTE O DELETE NÃO PRECISA DE MAPEAMENTO (AUTO-MAPPER).
             var aluno = _repo.GetAlunoById(id);
@@ -121,7 +124,7 @@ namespace SmartSchool.WebAPI.V2.Controllers
 
             _repo.Delete(aluno);
 
-            if (_repo.SaveChanges())
+            if (await _repo.SaveChangesAsync())
             {
                 return Ok("Aluno(a) deletado(a) com sucesso !!!");
             }
