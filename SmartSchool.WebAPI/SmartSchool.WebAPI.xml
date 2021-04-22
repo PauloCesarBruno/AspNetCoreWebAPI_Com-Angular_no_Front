@@ -16,7 +16,7 @@
             <param name="repo"></param>
             <param name="mapper"></param>
         </member>
-        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Get">
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Get(SmartSchool.WebAPI.Helpers.PageParams)">
             <summary>
             Método responsável para retornar todos os Alunos, da Versão 01.
             </summary>
@@ -25,6 +25,12 @@
         <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.GetRegister">
             <summary>
             Método responsável por retornar apenas um(a) Aluno(a)Dto, da Versão 01.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.GetByDisciplinaId(SmartSchool.WebAPI.Helpers.PageParams,System.Int32)">
+            <summary>
+            Método responsável por retonar apenas um único AlunoDTO.
             </summary>
             <returns></returns>
         </member>
@@ -77,7 +83,7 @@
             <param name="repo"></param>
             <param name="mapper"></param>
         </member>
-        <member name="M:SmartSchool.WebAPI.V1.Controllers.ProfessorController.Get">
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.ProfessorController.Get(SmartSchool.WebAPI.Helpers.PageParams)">
             <summary>
             Método responsável para retornar todos os Professores, da Versão 01.
             </summary>
@@ -163,9 +169,15 @@
             <param name="repo"></param>
             <param name="mapper"></param>
         </member>
-        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.Get">
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.Get(SmartSchool.WebAPI.Helpers.PageParams)">
             <summary>
             Método responsável para retornar todos os Alunos da Versão 02.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.GetByDisciplinaId(SmartSchool.WebAPI.Helpers.PageParams,System.Int32)">
+            <summary>
+            Método responsável por retonar apenas um único AlunoDTO.
             </summary>
             <returns></returns>
         </member>

@@ -5,6 +5,7 @@ using SmartSchool.WebAPI.Data;
 using SmartSchool.WebAPI.V1.Dtos;
 using SmartSchool.WebAPI.Models;
 using System.Threading.Tasks;
+using SmartSchool.WebAPI.Helpers;
 
 namespace SmartSchool.WebAPI.V2.Controllers
 {
@@ -37,11 +38,31 @@ namespace SmartSchool.WebAPI.V2.Controllers
         /// <returns></returns>
         // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
         [HttpGet]
-        public async Task <IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]PageParams pageParams)
         {
-            var alunos = await _repo.GetAllAlunosAsync(true);            
+            var alunos = await _repo.GetAllAlunosAsync(pageParams, true);            
 
-            return Ok(_mapper.Map<IEnumerable<AlunoDto>>(alunos));
+             var alunoResult = _mapper.Map<IEnumerable<AlunoDto>>(alunos);
+
+            Response.AddPagination(alunos.CurrentPage, alunos.PageSize, alunos.TotalCount, alunos.TotalPages);
+
+            return Ok(alunoResult);
+        }
+
+        /// <summary>
+        /// Método responsável por retonar apenas um único AlunoDTO.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ByDisciplina/{id}")]
+        public async Task<IActionResult> GetByDisciplinaId([FromQuery]PageParams pageParams,int id)
+        { 
+            var alunos = await _repo.GetAllAlunosByDisciplinaIdAsync(pageParams, id, false);
+         
+            var alunoResult = _mapper.Map<IEnumerable<AlunoDto>>(alunos);
+
+            Response.AddPagination(alunos.CurrentPage, alunos.PageSize, alunos.TotalCount, alunos.TotalPages);
+
+            return Ok(alunoResult);
         }
         
         /// <summary>
@@ -52,7 +73,7 @@ namespace SmartSchool.WebAPI.V2.Controllers
         // api/Aluno
         // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
         [HttpGet("{id}")] // QueryString: Ex.: http://localhost:5000/api/Aluno/3
-        public async Task <IActionResult> GetByIdAsync(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
             // Aqui abaixo se eu colocar  (id, true) Vem tudo que esta em Join lá no Repository
             var aluno = await _repo.GetAlunoByIdAsync(id, false);
@@ -70,7 +91,7 @@ namespace SmartSchool.WebAPI.V2.Controllers
         /// <returns></returns>
         // api/Aluno
         [HttpPost]
-        public async Task <IActionResult> Post(AlunoRegistrarDto model)
+        public async Task<IActionResult> Post(AlunoRegistrarDto model)
         {
             var aluno = _mapper.Map<Aluno>(model);
 
@@ -91,7 +112,7 @@ namespace SmartSchool.WebAPI.V2.Controllers
         /// <returns></returns>
         // api/Aluno/Id
         [HttpPut("{id}")]
-        public async Task <IActionResult> Put(int id, AlunoRegistrarDto model)
+        public async Task<IActionResult> Put(int id, AlunoRegistrarDto model)
         {
             var aluno = _repo.GetAlunoById(id);
 
@@ -115,7 +136,7 @@ namespace SmartSchool.WebAPI.V2.Controllers
         /// <returns></returns>
         // api/Aluno/Id
         [HttpDelete("{id}")]
-        public async Task <IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             // OBVIAMENTE O DELETE NÃO PRECISA DE MAPEAMENTO (AUTO-MAPPER).
             var aluno = _repo.GetAlunoById(id);

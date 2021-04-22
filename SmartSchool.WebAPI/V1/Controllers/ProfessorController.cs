@@ -5,6 +5,7 @@ using SmartSchool.WebAPI.Data;
 using SmartSchool.WebAPI.V1.Dtos;
 using SmartSchool.WebAPI.Models;
 using System.Threading.Tasks;
+using SmartSchool.WebAPI.Helpers;
 
 namespace SmartSchool.WebAPI.V1.Controllers
 {
@@ -36,10 +37,15 @@ namespace SmartSchool.WebAPI.V1.Controllers
         /// <returns></returns>
         // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
         [HttpGet]
-        public async Task <IActionResult> Get()
+        public async Task <IActionResult> Get([FromQuery]PageParams pageParams)
         {
-             var professor = await _repo.GetAllProfessoresAsync(true);
-            return Ok(_mapper.Map<IEnumerable<ProfessorDto>>(professor));
+            var professor = await _repo.GetAllProfessoresAsync(pageParams, true);
+             
+            var alunoResult = _mapper.Map<IEnumerable<ProfessorDto>>(professor);
+
+            Response.AddPagination(professor.CurrentPage, professor.PageSize, professor.TotalCount, professor.TotalPages);
+
+            return Ok(alunoResult);
         }
 
         /// <summary>

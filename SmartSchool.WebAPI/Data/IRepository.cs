@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using SmartSchool.WebAPI.Helpers;
 using SmartSchool.WebAPI.Models;
 
 namespace SmartSchool.WebAPI.Data
@@ -16,13 +18,13 @@ namespace SmartSchool.WebAPI.Data
          //________________________________________________________________________________________
          
         //Aluno (De Forma ASSINCRONA)
-         Task <Aluno[]> GetAllAlunosAsync(bool includeProfessor = false);
+         Task<PageList<Aluno>> GetAllAlunosAsync(PageParams pageParams, bool includeProfessor = false);
 
         // Opção para Forma Sincrona
          Aluno[] GetAllAlunos(bool includeProfessor = false);
 
         //Aluno (De Forma ASSINCRONA)
-         Task <Aluno[]> GetAllAlunosByDisciplinaIdAsync(int disciplinaId, bool includeProfessor = false);
+         Task<PageList<Aluno>> GetAllAlunosByDisciplinaIdAsync(PageParams pageParams, int disciplinaId, bool includeProfessor = false);
 
         // Opção para Forma Sincrona
          Aluno[] GetAllAlunosByDisciplinaId(int disciplinaId, bool includeProfessor = false);
@@ -36,13 +38,13 @@ namespace SmartSchool.WebAPI.Data
          // =============================================================================================
 
          // Professor (De Forma ASSINCRONA)
-         Task <Professor[]> GetAllProfessoresAsync(bool includeAlunos = false);
+         Task<PageList<Professor>> GetAllProfessoresAsync(PageParams pageParams, bool includeAlunos = false);
         
         // Opção para Forma Sincrona
          Professor[] GetAllProfessores(bool includeAlunos = false);
 
         // Professor (De Forma ASSINCRONA)
-         Task <Professor[]> GetAllProfessoresByDisciplinaIdAsync(int disciplinaId, bool includeAlunos = false);
+         Task <PageList<Professor>> GetAllProfessoresByDisciplinaIdAsync(int disciplinaId, bool includeAlunos = false);
 
         // Opção para Forma Sincrona
          Professor[] GetAllProfessoresByDisciplinaId(int disciplinaId, bool includeAlunos = false);
