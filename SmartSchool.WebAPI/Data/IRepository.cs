@@ -14,45 +14,25 @@ namespace SmartSchool.WebAPI.Data
          Task <bool> SaveChangesAsync();
 
 
-         // CONSULTAS COM OPÇÕES PARA OUTROS PROGRAMADORES ESCOLHEREM ENTRE ASSINCRONO OU NÃO:
-         //________________________________________________________________________________________
-         
-        //Aluno (De Forma ASSINCRONA)
+         // CONSULTAS
+         // =====================================================================================================================
+
+         // Aluno(s) 
          Task<PageList<Aluno>> GetAllAlunosAsync(PageParams pageParams, bool includeProfessor = false);
-
-        // Opção para Forma Sincrona
-         Aluno[] GetAllAlunos(bool includeProfessor = false);
-
-        //Aluno (De Forma ASSINCRONA)
-         Task<PageList<Aluno>> GetAllAlunosByDisciplinaIdAsync(PageParams pageParams, int disciplinaId, bool includeProfessor = false);
-
-        // Opção para Forma Sincrona
-         Aluno[] GetAllAlunosByDisciplinaId(int disciplinaId, bool includeProfessor = false);
-
-         //Aluno (De Forma ASSINCRONA)
+        
+         Task<PageList<Aluno>> GetAllAlunosByDisciplinaIdAsync(PageParams pageParams, int disciplinaId, bool includeProfessor = false);        
+         
          Task <Aluno> GetAlunoByIdAsync(int alunoId, bool includeProfessor = false);
 
-        // Opção paramForma Sincrona
-         Aluno GetAlunoById(int alunoId, bool includeProfessor = false);
-
-         // =============================================================================================
-
-         // Professor (De Forma ASSINCRONA)
-         Task<PageList<Professor>> GetAllProfessoresAsync(PageParams pageParams, bool includeAlunos = false);
         
-        // Opção para Forma Sincrona
-         Professor[] GetAllProfessores(bool includeAlunos = false);
+         // =============================================================================================
+         
 
-        // Professor (De Forma ASSINCRONA)
-         Task <PageList<Professor>> GetAllProfessoresByDisciplinaIdAsync(int disciplinaId, bool includeAlunos = false);
-
-        // Opção para Forma Sincrona
-         Professor[] GetAllProfessoresByDisciplinaId(int disciplinaId, bool includeAlunos = false);
-
-        // Professor (De Forma ASSINCRONA)
-         Task <Professor> GetProfessorByIdAsync(int professorId, bool includeProfessor = false);
-
-        // Opção para Forma Sincrona
-        Professor GetProfessorById(int professorId, bool includeProfessor = false);
+         // Professor(es)
+         Task<PageList<Professor>> GetAllProfessoresAsync(PageParams pageParams, bool includeAlunos = false);       
+       
+         Task <PageList<Professor>> GetAllProfessoresByDisciplinaIdAsync(int disciplinaId, bool includeAlunos = false);       
+       
+         Task <Professor> GetProfessorByIdAsync(int professorId, bool includeProfessor = false);        
     }
 }

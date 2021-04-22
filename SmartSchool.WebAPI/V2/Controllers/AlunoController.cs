@@ -114,11 +114,11 @@ namespace SmartSchool.WebAPI.V2.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, AlunoRegistrarDto model)
         {
-            var aluno = _repo.GetAlunoById(id);
+            var aluno = _repo.GetAlunoByIdAsync(id);
 
             if (aluno == null) BadRequest("Aluno(a) não Encontrado !!!");
 
-            _mapper.Map(model, aluno);
+            await _mapper.Map(model, aluno);
 
             _repo.Update(aluno);
 
@@ -139,7 +139,7 @@ namespace SmartSchool.WebAPI.V2.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             // OBVIAMENTE O DELETE NÃO PRECISA DE MAPEAMENTO (AUTO-MAPPER).
-            var aluno = _repo.GetAlunoById(id);
+            var aluno = _repo.GetAlunoByIdAsync(id);
 
             if (aluno == null) BadRequest("Aluno(a) não encontrado !!!");
 
