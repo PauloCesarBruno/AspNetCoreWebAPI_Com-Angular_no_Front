@@ -11,7 +11,7 @@
         </member>
         <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.#ctor(SmartSchool.WebAPI.Data.IRepository,AutoMapper.IMapper)">
             <summary>
-            
+            Método responsável por retornar apenas um Aluno(a) por meio do Código Id, da Versão 01.
             </summary>
             <param name="repo"></param>
             <param name="mapper"></param>
@@ -144,6 +144,11 @@
         <member name="P:SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto.Nome">
             <summary>
             Nome � o Primeiro Nome e Sobrenome do Aluno.
+            </summary>
+        </member>
+        <member name="P:SmartSchool.WebAPI.V1.Dtos.ProfessorRegistrarDto.Nome">
+            <summary>
+            Nome � o Primeiro Nome e Sobrenome do Professor.
             </summary>
         </member>
         <member name="T:SmartSchool.WebAPI.V2.Controllers.AlunoController">

@@ -6,6 +6,9 @@ namespace SmartSchool.WebAPI.V1.Dtos
     {
          public int Id { get; set; }
         public int Registro { get; set; }
+        /// <summary>
+        /// Nome � o Primeiro Nome e Sobrenome do Professor.
+        /// </summary>
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public string Telefone { get; set; }

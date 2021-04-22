@@ -14,7 +14,7 @@ namespace SmartSchool.WebAPI.Models
             this.Id = id;
             this.Registro = registro;
             this.Nome = nome;
-            this.Sobrenome = Sobrenome;
+            this.Sobrenome = sobrenome;
         }
         public int Id { get; set; }
          public int Registro { get; set; }

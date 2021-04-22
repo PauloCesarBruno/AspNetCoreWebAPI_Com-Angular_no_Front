@@ -21,7 +21,7 @@ namespace SmartSchool.WebAPI.V1.Controllers
         private readonly IMapper _mapper;
 
         /// <summary>
-        /// 
+        /// Método responsável por retornar apenas um Aluno(a) por meio do Código Id, da Versão 01.
         /// </summary>
         /// <param name="repo"></param>
         /// <param name="mapper"></param>
