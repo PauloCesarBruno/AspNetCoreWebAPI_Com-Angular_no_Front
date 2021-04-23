@@ -5,17 +5,19 @@ using SmartSchool.WebAPI.Models;
 
 namespace SmartSchool.WebAPI.Data
 {
+    // MANIPULAÇÕES
+    // =============================================================================================================
     public interface IRepository
     {
         // O Que for passado como parâmetro vai ser do Tipo(T) classe que vai ser trabalhado no Add,Update e Delete.
          void Add<T>(T entity) where T : class;
          void Update<T>(T entity) where T : class;
          void Delete<T>(T entity) where T : class;
-         Task <bool> SaveChangesAsync();
+         Task<bool> SaveChangesAsync();
 
 
          // CONSULTAS
-         // =====================================================================================================================
+         // =============================================================================================================
 
          // Aluno(s) 
          Task<PageList<Aluno>> GetAllAlunosAsync(PageParams pageParams, bool includeProfessor = false);

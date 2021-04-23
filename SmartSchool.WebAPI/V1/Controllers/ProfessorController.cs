@@ -113,11 +113,11 @@ namespace SmartSchool.WebAPI.V1.Controllers
         [HttpPut("{id}")]
         public async Task <IActionResult> Put(int id, ProfessorRegistrarDto model)
         {
-             var professor = _repo.GetProfessorByIdAsync(id);
+             var professor = await _repo.GetProfessorByIdAsync(id);
 
             if(professor == null) BadRequest("Professor(a) não encontrado !!!");
 
-            await _mapper.Map(model, professor);
+            _mapper.Map(model, professor);
 
             _repo.Update(professor);
 
@@ -139,11 +139,11 @@ namespace SmartSchool.WebAPI.V1.Controllers
         [HttpPatch("{id}")] // [HttpPatch("{id}")] -> Atualiza Parcialmente
         public async Task <IActionResult> Patch(int id, ProfessorRegistrarDto model)
         {
-            var professor = _repo.GetProfessorByIdAsync(id);
+            var professor = await _repo.GetProfessorByIdAsync(id);
 
             if(professor == null) BadRequest("Professor(a) não encontrado !!!");
 
-            await _mapper.Map(model, professor);
+            _mapper.Map(model, professor);
 
             _repo.Update(professor);
 
@@ -165,7 +165,7 @@ namespace SmartSchool.WebAPI.V1.Controllers
         public async Task <IActionResult> Delete(int id)
         {
             // Aqui abaixo se eu colocar  (id, true) Vem tudo que esta em Join lá no Repository
-            var professor = _repo.GetProfessorByIdAsync(id);
+            var professor = await _repo.GetProfessorByIdAsync(id);
 
             if(professor == null) BadRequest("Professor(a) não encontrado !!!");
 

@@ -7,9 +7,9 @@ using SmartSchool.WebAPI.Models;
 
 namespace SmartSchool.WebAPI.Data
 {
-    // =======================================================================================
     // MANIPULAÇÕES
-    
+    // =======================================================================================
+        
     public class Repository : IRepository
     {
         private readonly SmartContext _context;
@@ -41,9 +41,9 @@ namespace SmartSchool.WebAPI.Data
         }
 
 
+        // CONSULTA: SELECT´S COM JOIN´S.
         // =======================================================================================
-        // CONSULTA: SELECT´S COM JOIN´S...
-
+        
         
         public async Task<PageList<Aluno>> GetAllAlunosAsync(PageParams pageParams, bool includeProfessor = false)
         {
