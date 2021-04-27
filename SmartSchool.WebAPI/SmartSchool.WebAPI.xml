@@ -78,10 +78,8 @@
         </member>
         <member name="F:SmartSchool.WebAPI.V1.Controllers.ProfessorController._repo">
             <summary>
-            
+            Versão 01 do meu controlador de Professores
             </summary>
-            <param name="repo"></param>
-            <param name="mapper"></param>
         </member>
         <member name="M:SmartSchool.WebAPI.V1.Controllers.ProfessorController.Get(SmartSchool.WebAPI.Helpers.PageParams)">
             <summary>

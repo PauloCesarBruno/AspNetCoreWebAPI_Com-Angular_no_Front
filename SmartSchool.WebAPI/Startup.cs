@@ -26,76 +26,60 @@ namespace SmartSchool.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SmartContext>(context =>
-                context.UseSqlServer(Configuration.GetConnectionString("Default"))
+            services.AddDbContext<SmartContext>(
+                context => context.UseMySql(Configuration.GetConnectionString("MySqlConnection"))
             );
 
             // Abaixo Ignora o Loop do Json.
-            services.AddControllers()
+               services.AddControllers()
                     .AddNewtonsoftJson(
-                        opt => opt.SerializerSettings.ReferenceLoopHandling =
+                        opt => opt.SerializerSettings.ReferenceLoopHandling = 
                             Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            // Injetando dependência para o Auto_Mapper Ja baixado e referenciasdo no (csproj)
-            // Quero fazer Mapeamento entre os meus DTO´s e meu Dominio(Models).
-            /* Passando como parâmetro a aplicação de dominio dos assemblies, para que o Auto_Mapper 
-            procure dentro dos meus assmblies (Dll´s) quem esta herdando de Profille dentro da pasra
-            (Helpers onde esta o SmartSchoolProfile.cs).*/
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            // Injetando IRepository e Repository p/ os Controller para encapsulamento e abstração do Contexto 
             services.AddScoped<IRepository, Repository>();
 
-            // DOCUMENTAÇÃO DO SWAGGER
-            // =================================================================================================
-            services.AddVersionedApiExplorer(opt =>
+            services.AddVersionedApiExplorer(options => 
             {
-                opt.GroupNameFormat = "'v'VVV";
-                opt.SubstituteApiVersionInUrl = true;
+                options.GroupNameFormat = "'v'VVV";
+                options.SubstituteApiVersionInUrl = true;
             })
-            .AddApiVersioning(opt => 
+            .AddApiVersioning(options => 
             {
-                // Caso não sendo imposta uma Vesão para minha Controller, a Versão irá ser a Padrão...
-                opt.DefaultApiVersion = new ApiVersion(1, 0);
-                opt.AssumeDefaultVersionWhenUnspecified = true;
-                opt.ReportApiVersions = true;
-            }); 
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ReportApiVersions = true;
+            });
 
-            var apiProvidersDescription = services.BuildServiceProvider()
-                                                  .GetService<IApiVersionDescriptionProvider>();            
-            services.AddSwaggerGen(opt => { 
-                
+            var apiProviderDescription = services.BuildServiceProvider()
+                                                 .GetService<IApiVersionDescriptionProvider>();   
+
+            services.AddSwaggerGen(options => {                 
             //====================================================================================================================================
             // Tem que entrar em um Foreach para pegar a String da Verssão
             // Serviço Abaixo adiciona o SWeger Instalado vide (csproj)
 
-                foreach (var description in apiProvidersDescription.ApiVersionDescriptions)
+                 foreach (var description in apiProviderDescription.ApiVersionDescriptions)
                 {
-                        // No localhoste para pegar o json vai dar: (http://localhost:5000/swagger/SmartSchoolAPI/swagger.json)
-                        opt.SwaggerDoc(                     
-                        description.GroupName, 
+                    options.SwaggerDoc(
+                        description.GroupName,
                         new Microsoft.OpenApi.Models.OpenApiInfo()
                         {
                             Title = "SmartSchool API",
                             Version = description.ApiVersion.ToString(),
-                            // Não é meu site de Termo de Serviços, mesmo porque não tenho um
-                            // Porem servira soment para teste...
-                            TermsOfService  = new Uri("http://sistemahospitalar.gear.host/"),
-                            Description = "Web API para Consumo de Escolas e Cursos",
-                            // Colocando licença, por eEx. Só poderá acessar a API quem tiver uma licênça especifica.
+                            TermsOfService = new Uri("http://vsqlgest.gearhostpreview.com/"), // Exemplo Site Gestão de Vendas.
+                            Description = "A descrição da WebAPI do SmartSchool",
                             License = new Microsoft.OpenApi.Models.OpenApiLicense
                             {
-                                Name = "SamrtSchool Licênsa",
-
-                                // Não é um Site de Termos de Uso, porém está direcionado a ele apenas para testes de Swagger
-                                Url = new Uri("https://www.youtube.com/channel/UC-7rKFVKo4JNNifPBBEEoYw")
+                                Name = "SmartSchool License",
+                                Url = new Uri("https://www.youtube.com/channel/UC-7rKFVKo4JNNifPBBEEoYw?view_as=subscriber") // Exemplo Meu Canal YouTube
                             },
-
                             Contact = new Microsoft.OpenApi.Models.OpenApiContact
                             {
-                                Name = "Paulo Cesar Cordovil Bruno",
-                                Email ="p_bruno001@hotmail.com",
-                                Url = new Uri ("http://sistemahospitalar.gear.host/")
+                                Email = "p_bruno001@hotmail.com",
+                                Name = "PAULO CESAR C. BRUNO -> (Sites anexo servem somente como exemplo)",
+                                Url = new Uri("http://sistemahospitalar.gear.host/") // Exemplo Site Sistema Hospitalar.
                             }
                         }
                     );  
@@ -111,19 +95,18 @@ namespace SmartSchool.WebAPI
                 var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
 
-                opt.IncludeXmlComments(xmlCommentsFullPath);
+                options.IncludeXmlComments(xmlCommentsFullPath);
             });
-
-            services.AddMvcCore();
+            
             services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app,
+        public void Configure(IApplicationBuilder app, 
                               IWebHostEnvironment env,
                               IApiVersionDescriptionProvider apiProviderDescription) // Add (Injetado).
         {
-            if (env.IsDevelopment())
+           if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -131,29 +114,29 @@ namespace SmartSchool.WebAPI
             // app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             // CONFIGURAÇÃO DO SWAGGER
             app.UseSwagger()
-               //===================================================================================
-               .UseSwaggerUI(opt =>
+               .UseSwaggerUI(options =>
                {
-                   foreach (var description in  apiProviderDescription.ApiVersionDescriptions)
-                   {
-                        opt.SwaggerEndpoint(
-                            $"/swagger/{description.GroupName}/swagger.json",
-                            description.GroupName.ToUpperInvariant()
-                        );                       
+                   foreach (var description in apiProviderDescription.ApiVersionDescriptions)
+                   {                       
+                        options.SwaggerEndpoint(
+                            $"/swagger/{description.GroupName}/swagger.json", 
+                            description.GroupName.ToUpperInvariant());
                    }
-                   opt.RoutePrefix = "";
+                   options.RoutePrefix = "";
                });
+
+            // app.UseAuthorization();
+
 
             /*==================================================================================
             DIGITAR: http://localhost:46458/index.html NO VISUAL STUDIO 2019, por motivo que no
             Visual Studio 2019 o localhoste esta rodando no IIS na Porta Acima descrita(46458).
             Rodar o navegador primeiro edigitar a URL -> http://localhost:46458/index.html
-            ===================================================================================*/
-
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            ===================================================================================*/            
 
             app.UseAuthorization();
 

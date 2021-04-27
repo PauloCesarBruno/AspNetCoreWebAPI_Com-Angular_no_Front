@@ -18,10 +18,8 @@ namespace SmartSchool.WebAPI.V1.Controllers
     public class ProfessorController : ControllerBase
     {
         /// <summary>
-        /// 
+        /// Versão 01 do meu controlador de Professores
         /// </summary>
-        /// <param name="repo"></param>
-        /// <param name="mapper"></param>
         private readonly IRepository _repo;
         private readonly IMapper _mapper;
 
