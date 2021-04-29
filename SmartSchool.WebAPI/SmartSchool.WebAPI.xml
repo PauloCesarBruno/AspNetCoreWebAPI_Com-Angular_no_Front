@@ -6,7 +6,7 @@
     <members>
         <member name="T:SmartSchool.WebAPI.V1.Controllers.AlunoController">
             <summary>
-            Versão 01 do meu controlador de Alunos
+            Versão 01 do meu controlador de Alunos.
             </summary>
         </member>
         <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.#ctor(SmartSchool.WebAPI.Data.IRepository,AutoMapper.IMapper)">
@@ -73,7 +73,7 @@
         </member>
         <member name="T:SmartSchool.WebAPI.V1.Controllers.ProfessorController">
             <summary>
-            Versão 01 do meu controlador de Professores
+            Versão 01 do meu controlador de Professores.
             </summary>
         </member>
         <member name="F:SmartSchool.WebAPI.V1.Controllers.ProfessorController._repo">
