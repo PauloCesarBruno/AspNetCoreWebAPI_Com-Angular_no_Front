@@ -10,7 +10,7 @@ using SmartSchool.WebAPI.Helpers;
 namespace SmartSchool.WebAPI.V1.Controllers
 {
     /// <summary>
-    /// Versão 01 do meu controlador de Alunos
+    /// Versão 01 do meu controlador de Alunos.
     /// </summary>
     [ApiController]
     [ApiVersion("1.0")]
