@@ -68,7 +68,7 @@ namespace SmartSchool.WebAPI
                         {
                             Title = "SmartSchool API",
                             Version = description.ApiVersion.ToString(),
-                            TermsOfService = new Uri("http://vsqlgest.gearhostpreview.com/"), // Exemplo Site Gestão de Vendas.
+                            TermsOfService = new Uri(" http://sistemahospitalar.gear.host/"), // Exemplo Site Gestão de Vendas.
                             Description = "A descrição da WebAPI do SmartSchool",
                             License = new Microsoft.OpenApi.Models.OpenApiLicense
                             {
@@ -78,12 +78,12 @@ namespace SmartSchool.WebAPI
                             Contact = new Microsoft.OpenApi.Models.OpenApiContact
                             {
                                 Email = "p_bruno001@hotmail.com",
-                                Name = "PAULO CESAR C. BRUNO -> (Sites anexo servem somente como exemplo)",
-                                Url = new Uri("http://sistemahospitalar.gear.host/") // Exemplo Site Sistema Hospitalar.
+                                Name = "PAULO CESAR C. BRUNO.",
+                                Url = new Uri("http://pb-techprogramas.gear.host/index.cshtml") // Exemplo Site Sistema Hospitalar.
                             }
                         }
                     );  
-                }                           
+                }                          
                 
             // FINAL DA DOCUMENTAÇÃO DO SWAGGER
             // =================================================================================================
