@@ -77,6 +77,7 @@ namespace SmartSchool.WebAPI.V1.Controllers
 
             return Ok(professorDto);
         }
+        
 
         /// <summary>
         /// Metodo responsável por novo Registro de um(a) Professor(a), da Versão 01.

@@ -9,6 +9,7 @@ export class ProfessoresComponent implements OnInit {
 
   constructor() { }
 
+  // tslint:disable-next-line: typedef
   ngOnInit() {
   }
 
