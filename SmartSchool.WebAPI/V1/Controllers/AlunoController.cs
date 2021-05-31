@@ -67,15 +67,11 @@ namespace SmartSchool.WebAPI.V1.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("ByDisciplina/{id}")]
-        public async Task<IActionResult> GetByDisciplinaId([FromQuery]PageParams pageParams,int id)
+        public async Task<IActionResult> GetByDisciplinaId(int id)
         {
-            var alunos = await _repo.GetAllAlunosByDisciplinaIdAsync(pageParams, id, false);
-         
-            var alunoResult = _mapper.Map<IEnumerable<AlunoDto>>(alunos);
+            var result = await _repo.GetAllAlunosByDisciplinaIdAsync(id, false);
 
-            Response.AddPagination(alunos.CurrentPage, alunos.PageSize, alunos.TotalCount, alunos.TotalPages);
-
-            return Ok(alunoResult);
+            return Ok(result);
         }
 
         /// <summary>
@@ -92,7 +88,7 @@ namespace SmartSchool.WebAPI.V1.Controllers
             var aluno = await _repo.GetAlunoByIdAsync(id, false);
             if (aluno == null) return BadRequest("Aluno(a) de codigo " + id + " não foi encontrado !!!");
 
-            var alunoDto = _mapper.Map<AlunoDto>(aluno);
+            var alunoDto = _mapper.Map<AlunoRegistrarDto>(aluno);
 
             return Ok(alunoDto);
         }        
@@ -150,10 +146,11 @@ namespace SmartSchool.WebAPI.V1.Controllers
         /// <param name="id"></param>
         /// <param name="model"></param>
         /// <returns></returns>
+
         // api/Aluno/Id
         // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
         [HttpPatch("{id}")] // [HttpPatch("{id}")] -> Atualiza Parcialmente
-        public async Task<IActionResult> Patch(int id, AlunoRegistrarDto model)
+        public async Task<IActionResult> Patch(int id, AlunoPatchDto model)
         {
             var aluno = await _repo.GetAlunoByIdAsync(id);
 
@@ -165,7 +162,26 @@ namespace SmartSchool.WebAPI.V1.Controllers
 
             if (await _repo.SaveChangesAsync())
             {
-                return Created($"/api/aluno/{model.Id}", _mapper.Map<AlunoDto>(aluno));
+                return Created($"/api/aluno/{model.Id}", _mapper.Map<AlunoPatchDto>(aluno));
+            }
+            return BadRequest("Falha ao atualizar o  registro do aluno(a) !!!");
+        }
+
+        // api/Aluno/Id{id}/trocarEstado
+        [HttpPatch("{id}/trocarEstado")] // [HttpPatch("{id}")] -> Atualiza Parcialmente
+        public async Task<IActionResult> trocarEstado(int id, TrocaEstadoDto trocaEstado)
+        {
+            var aluno = await _repo.GetAlunoByIdAsync(id);
+
+            if (aluno == null) BadRequest("Aluno(a) não Encontrado !!!");
+
+            aluno.Ativo = trocaEstado.Estado;
+
+            _repo.Update(aluno);
+            if (await _repo.SaveChangesAsync())
+            {
+                var msn = aluno.Ativo ? "Ativado" : "Desativado";
+                return Ok(new { message = $"Aluno {msn} com sucesso !"});
             }
             return BadRequest("Falha ao atualizar o  registro do aluno(a) !!!");
         }

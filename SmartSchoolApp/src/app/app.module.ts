@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Componentes:
 
 import { AlunosComponent } from './components/alunos/alunos.component';
+import { AlunosProfessoresComponent } from './components/professores/alunos-professores/alunos-professores.component';
+import { ProfessorDetalheComponent } from './components/professores/professor-detalhe/professor-detalhe.component';
 import { ProfessoresComponent } from './components/professores/professores.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -28,6 +30,8 @@ import { ProfessoresAlunosComponent } from './components/alunos/professores-alun
   declarations: [
     AppComponent,
     AlunosComponent,
+    AlunosProfessoresComponent,
+    ProfessorDetalheComponent,
     ProfessoresAlunosComponent,
     ProfessoresComponent,
     PerfilComponent,
@@ -47,7 +51,7 @@ import { ProfessoresAlunosComponent } from './components/alunos/professores-alun
     NgxSpinnerModule,
     ToastrModule.forRoot({
       timeOut: 3500,
-      positionClass: 'toast-top-right',
+      positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       progressBar: true,
       closeButton: true

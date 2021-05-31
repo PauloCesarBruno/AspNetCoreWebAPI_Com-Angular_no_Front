@@ -49,20 +49,16 @@ namespace SmartSchool.WebAPI.V2.Controllers
             return Ok(alunoResult);
         }
 
-        /// <summary>
+         /// <summary>
         /// Método responsável por retonar apenas um único AlunoDTO.
         /// </summary>
         /// <returns></returns>
         [HttpGet("ByDisciplina/{id}")]
-        public async Task<IActionResult> GetByDisciplinaId([FromQuery]PageParams pageParams,int id)
-        { 
-            var alunos = await _repo.GetAllAlunosByDisciplinaIdAsync(pageParams, id, false);
-         
-            var alunoResult = _mapper.Map<IEnumerable<AlunoDto>>(alunos);
+        public async Task<IActionResult> GetByDisciplinaId(int id)
+        {
+            var result = await _repo.GetAllAlunosByDisciplinaIdAsync(id, false);
 
-            Response.AddPagination(alunos.CurrentPage, alunos.PageSize, alunos.TotalCount, alunos.TotalPages);
-
-            return Ok(alunoResult);
+            return Ok(result);
         }
         
         /// <summary>

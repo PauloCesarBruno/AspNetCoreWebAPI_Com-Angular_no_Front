@@ -38,6 +38,16 @@ export class AlunoService {
     return this.http.put(`${this.baseURL}/${aluno.id}`, aluno);
   }
 
+   // tslint:disable-next-line: typedef
+   trocarEstado(alunoId: number, ativo: boolean) {
+    return this.http.patch(`${this.baseURL}/${alunoId}/trocarEstado`, { estado: ativo});
+  }
+
+  // tslint:disable-next-line: typedef
+  patch(aluno: Aluno) {
+    return this.http.patch(`${this.baseURL}/${aluno.id}`, aluno);
+  }
+
   // tslint:disable-next-line: typedef
   delete(id: number) {
     return this.http.delete(`${this.baseURL}/${id}`);

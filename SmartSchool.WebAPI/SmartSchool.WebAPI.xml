@@ -28,7 +28,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.GetByDisciplinaId(SmartSchool.WebAPI.Helpers.PageParams,System.Int32)">
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.GetByDisciplinaId(System.Int32)">
             <summary>
             Método responsável por retonar apenas um único AlunoDTO.
             </summary>
@@ -56,7 +56,7 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Patch(System.Int32,SmartSchool.WebAPI.V1.Dtos.AlunoRegistrarDto)">
+        <member name="M:SmartSchool.WebAPI.V1.Controllers.AlunoController.Patch(System.Int32,SmartSchool.WebAPI.V1.Dtos.AlunoPatchDto)">
             <summary>
              Método Responsalvel por Alteração (Parcial) do Registro de algum(a) Aluno(a), da Versão 01.
             </summary>
@@ -173,7 +173,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.GetByDisciplinaId(SmartSchool.WebAPI.Helpers.PageParams,System.Int32)">
+        <member name="M:SmartSchool.WebAPI.V2.Controllers.AlunoController.GetByDisciplinaId(System.Int32)">
             <summary>
             Método responsável por retonar apenas um único AlunoDTO.
             </summary>

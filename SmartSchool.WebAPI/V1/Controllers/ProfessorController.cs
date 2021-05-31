@@ -70,14 +70,25 @@ namespace SmartSchool.WebAPI.V1.Controllers
         public async Task <IActionResult> GetByIdAsync(int id)
         {
            // Aqui abaixo se eu colocar  (id, true) Vem tudo que esta em Join lá no Repository 
-           var professor = await _repo.GetProfessorByIdAsync(id, false);
+           var professor = await _repo.GetProfessorByIdAsync(id, true);
             if (professor == null) return BadRequest("Professor(a) de codigo " + id + " não foi encontrado !!!");
 
             var professorDto = _mapper.Map<ProfessorDto>(professor);
 
             return Ok(professorDto);
         }
-        
+
+        // api/professor
+        [HttpGet("byaluno/{alunoId}")] // QueryString: Ex.: http://localhost:5000/api/Professor/3
+        public async Task <IActionResult> GetByAlunoIdAsync(int alunoId)
+        {
+           // Aqui abaixo se eu colocar  (id, true) Vem tudo que esta em Join lá no Repository 
+           var professores = await _repo.GetProfessoresByIdAsync(alunoId, true);
+            if (professores == null) return BadRequest("Professores não encontrados !!!");
+
+
+            return Ok(_mapper.Map<IEnumerable<ProfessorDto>>(professores));
+        }
 
         /// <summary>
         /// Metodo responsável por novo Registro de um(a) Professor(a), da Versão 01.

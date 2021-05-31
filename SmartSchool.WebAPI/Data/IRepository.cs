@@ -22,7 +22,7 @@ namespace SmartSchool.WebAPI.Data
          // Aluno(s) 
          Task<PageList<Aluno>> GetAllAlunosAsync(PageParams pageParams, bool includeProfessor = false);
         
-         Task<PageList<Aluno>> GetAllAlunosByDisciplinaIdAsync(PageParams pageParams, int disciplinaId, bool includeProfessor = false);        
+         Task<Aluno[]> GetAllAlunosByDisciplinaIdAsync(int disciplinaId, bool includeProfessor = false);        
          
          Task <Aluno> GetAlunoByIdAsync(int alunoId, bool includeProfessor = false);
 
@@ -35,6 +35,8 @@ namespace SmartSchool.WebAPI.Data
        
          Task <PageList<Professor>> GetAllProfessoresByDisciplinaIdAsync(int disciplinaId, bool includeAlunos = false);       
        
-         Task <Professor> GetProfessorByIdAsync(int professorId, bool includeProfessor = false);        
+         Task <Professor> GetProfessorByIdAsync(int professorId, bool includeProfessor = false); 
+
+         Task <PageList<Professor>> GetProfessoresByIdAsync(int alunoId, bool includeAlunos = false);       
     }
 }

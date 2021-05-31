@@ -3,4 +3,5 @@ export class Aluno {
   nome: string | any;
   sobrenome: string | any;
   telefone: number | any;
+  ativo: boolean | any;
 }
