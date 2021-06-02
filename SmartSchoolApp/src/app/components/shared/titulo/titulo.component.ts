@@ -1,4 +1,3 @@
-import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,11 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TituloComponent implements OnInit {
 
-  @Input() titulo: string | any;
-
   constructor() { }
 
-  // tslint:disable-next-line: typedef
   ngOnInit() {
   }
 
