@@ -23,6 +23,8 @@ import { TituloComponent } from './components/shared/titulo/titulo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfessoresAlunosComponent } from './components/alunos/professores-alunos/professores-alunos.component';
 
+import { FooterComponent } from './components/footer/footer.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +36,7 @@ import { ProfessoresAlunosComponent } from './components/alunos/professores-alun
     PerfilComponent,
     DashboardComponent,
     NavComponent,
+    FooterComponent,
     TituloComponent
   ],
   imports: [
