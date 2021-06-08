@@ -36,7 +36,7 @@ namespace SmartSchool.WebAPI.V2.Controllers
         /// Método responsável para retornar todos os Alunos da Versão 02.
         /// </summary>
         /// <returns></returns>
-        // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE
+        // ESTE MÉTODO É ASSINCRONO PARA GANHO DE PERFORMANCE.
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery]PageParams pageParams)
         {

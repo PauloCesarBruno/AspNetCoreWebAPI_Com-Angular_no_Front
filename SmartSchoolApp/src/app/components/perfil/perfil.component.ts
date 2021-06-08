@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilComponent implements OnInit {
 
+ 
+  data = new Date;
+  ano = this.data.getFullYear();
+
   constructor() { }
 
   ngOnInit() {
