@@ -70,7 +70,31 @@
         </tr>
       </tbody>
     </table>
+
+    <!--COMEÇA A ROTINA DE PAGINAÇÃO-->
+    <!--Retirado do ngx-bootstrap (não esquecer de referenciar no app.module como forRoot())-->
+
+    <div class="d-flex justify-content-center">
+
+      <!--Objetos criados dentro da pasta com GenerateClass (models)-->
+      <pagination
+      [boundaryLinks]="true"
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage"
+      [(ngModel)]="pagination.currentPage"
+      (pageChanged)="pageChanged($event)"
+
+      previousText="&lsaquo;"
+      nextText="&rsaquo;"
+      firstText="&laquo;"
+      lastText="&raquo;">
+      </pagination>
+
+    </div>
+
+    <!--FINALIZA A ROTINA DE PAFGIÇÃO-->
   </div>
+
 </div>
 
 <ng-template #template>

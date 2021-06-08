@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Aluno } from '../models/Aluno';
 
 import { environment } from 'src/environments/environment';
+
+import { map } from 'rxjs/operators';
+import { PaginatedResult } from '../models/Pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +18,29 @@ export class AlunoService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Aluno[]> {
-    return this.http.get<Aluno[]>(this.baseURL);
+  // getAll para Pagination:
+  getAll(page?: number, itemsPerPage?: number): Observable<PaginatedResult<Aluno[]>> {
+    const paginatedResult: PaginatedResult<Aluno[]> = new PaginatedResult<Aluno[]>();
+
+    let params = new HttpParams();
+
+    if (page != null && itemsPerPage != null)
+    params = params.append('pageNumber', page.toString());
+
+    params = params.append('pageSize', String(itemsPerPage));
+
+      return this.http.get<Aluno[]>(this.baseURL, { observe: 'response', params })
+      .pipe(
+        map(response => {
+
+          paginatedResult.result = response.body;
+
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
+          return paginatedResult;
+        })
+      );
   }
 
   getById(id: number): Observable<Aluno> {

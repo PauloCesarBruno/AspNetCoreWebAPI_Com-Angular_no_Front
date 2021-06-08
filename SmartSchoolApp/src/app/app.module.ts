@@ -10,6 +10,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+
 import { AlunosComponent } from './components/alunos/alunos.component';
 import { AlunosProfessoresComponent } from './components/professores/alunos-professores/alunos-professores.component';
 import { ProfessorDetalheComponent } from './components/professores/professor-detalhe/professor-detalhe.component';
@@ -42,6 +44,7 @@ import { ProfessoresAlunosComponent } from './components/alunos/professores-alun
     HttpClientModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
+    PaginationModule.forRoot (), // Add. para Paginação
     BrowserAnimationsModule,
     NgxSpinnerModule,
     ToastrModule.forRoot({
