@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            // If you have changed target frameworks, make sure to update the program path.
+            // If you have changed target frameworks, make sure to update the program path
             "program": "${workspaceFolder}/SmartSchool.WebAPI/bin/Debug/net5.0/SmartSchool.WebAPI.dll",
             "args": [],
             "cwd": "${workspaceFolder}/SmartSchool.WebAPI",
