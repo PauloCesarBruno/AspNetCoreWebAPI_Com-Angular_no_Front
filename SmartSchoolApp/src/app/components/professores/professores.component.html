@@ -8,16 +8,30 @@
         <th scope="col">#</th>
         <th scope="col">Nome</th>
         <th scope="col">Disciplina</th>
+        <th scope="col">Ativação</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let prof of professores">
         <td>
-          <a [routerLink]="['/professor/', prof.id]" class="text-dark btn btn-sm btn-outline-warning">Detalhe</a>
+          <!-- O (*ngIf="prof.ativo" mantem o <a .... Aparecendo ou não)-->
+          <a [routerLink]="['/professor/', prof.id]" class="text-dark btn btn-sm btn-outline-warning" *ngIf="prof.ativo"
+          >
+          Detalhe
+        </a>
         </td>
         <th scope="row">{{prof.id}}</th>
         <td>{{prof.nome}}</td>
         <td>{{disciplinaConcat(prof.disciplinas)}}</td>
+
+        <div class="btn-group">
+          <button
+           style="margin-left: 1px;" class="btn btn-sm"
+           [ngClass]="{ 'btn-outline-danger' : prof.ativo, 'btn-outline-success': !prof.ativo}"
+           (click)="trocarEstado(prof)">
+           {{ prof.ativo ? 'Desativar' :  'Ativar' }}
+          </button>
+        </div>
       </tr>
     </tbody>
   </table>

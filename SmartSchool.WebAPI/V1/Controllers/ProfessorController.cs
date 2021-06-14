@@ -164,6 +164,25 @@ namespace SmartSchool.WebAPI.V1.Controllers
             return BadRequest("Falha ao Atualizar Professor(a) !!!");
         }
 
+         // api/Aluno/Id{id}/trocarEstado
+        [HttpPatch("{id}/trocarEstado")] // [HttpPatch("{id}")] -> Atualiza Parcialmente
+        public async Task<IActionResult> trocarEstado(int id, TrocaEstadoDto trocaEstado)
+        {
+            var professor = await _repo.GetProfessorByIdAsync(id);
+
+            if (professor == null) BadRequest("Professor(a) não Encontrado !!!");
+
+            professor.Ativo = trocaEstado.Estado;
+
+            _repo.Update(professor);
+            if (await _repo.SaveChangesAsync())
+            {
+                var msn = professor.Ativo ? "Ativado" : "Desativado";
+                return Ok(new { message = $"Aluno {msn} com sucesso !"});
+            }
+            return BadRequest("Falha ao atualizar o  registro do aluno(a) !!!");
+        }
+
         /// <summary>
         ///  MétodoResponsalvel por Exclusão de Registro de um Professor(a), da Versão 01.
         /// </summary>

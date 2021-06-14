@@ -37,7 +37,7 @@ export class ProfessoresComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscriber))
       .subscribe((professores: Professor[]) => {
         this.professores = professores;
-        this.toastr.success('Professores foram carregado com Sucesso!');
+        this.toastr.success('Professores carregado com Sucesso!');
       }, (error: any) => {
         this.toastr.error('Professores não carregados!');
         console.log(error);
@@ -57,5 +57,29 @@ export class ProfessoresComponent implements OnInit, OnDestroy {
   disciplinaConcat(disciplinas: Disciplina[]) {
     return Util.nomeConcat(disciplinas);
   }
+
+  trocarEstado(professor: Professor) {
+    this.professorService.trocarEstado(professor.id, !professor.ativo)
+        .pipe(takeUntil(this.unsubscriber))
+        .subscribe(
+          (resp) => {
+            console.log(resp);
+            this.carregarProfessores();
+            this.toastr.success('Professor salvo com sucesso!');
+          }, (error: any) => {
+            this.toastr.error(`Erro: Professor não pode ser salvo!`);
+            console.error(error);
+            this.spinner.hide();
+          }, () => this.spinner.hide()
+        );
+
+        /*
+        let x = document.getElementById('rota');
+        let y = document.getElementById('rt');
+        if(x?.textContent == 'Desativar')
+         y?.textContent == 'jbjj';
+        */
+  }
+
 
 }

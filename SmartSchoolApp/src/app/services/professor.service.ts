@@ -33,6 +33,10 @@ export class ProfessorService {
     return this.http.put(`${this.baseURL}/${professor.id}`, Professor);
   }
 
+  trocarEstado(professorId: number, ativo: boolean) {
+    return this.http.patch(`${this.baseURL}/${professorId}/trocarEstado`, { estado: ativo });
+  }
+
   delete(id: number) {
     return this.http.delete(`${this.baseURL}/${id}`);
   }
